@@ -1,0 +1,8 @@
+# Folders
+.idea
+src/node_modules
+src/storage
+
+# Files
+src/.env
+src/config/email-service.js

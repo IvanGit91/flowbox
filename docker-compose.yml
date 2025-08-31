@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  flowbox-dev:
+    image: flowbox
+    build:
+      context: src
+      dockerfile: Dockerfile
+      args:
+        MACHINE: dev
+    ports:
+      - "3500:3500"
+      - "3501:3501"
+    expose:
+      - "3500"
+      - "3501"
+    volumes:
+      - ./src:/usr/src/app
+    command: sh -c "npm run dev:watch:debug"
+    restart: on-failure
+    env_file:
+      - src/.env
+
+  flowbox-prod:
+    image: flowbox
+    build:
+      context: src
+      dockerfile: Dockerfile
+      args:
+        MACHINE: prod
+    ports:
+      - "3500:3500"
+    expose:
+      - "3500"
+    command: node app.js
+    restart: on-failure
